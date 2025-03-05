@@ -2,11 +2,11 @@ import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@cl
 import Image from "next/image";
 import Link from "next/link";
 
-import react from "react";
+import React from "react";
 import { Button } from "./button";
 // import { Button } from "@/components/ui/button";
 
-import { ChevronDown, Layout, LayoutDashboard, StarsIcon } from "lucide-react";
+import { ChevronDown, FileText, GraduationCap, Layout, LayoutDashboard, PenBox, StarsIcon } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./dropdown-menu";
 
 const Header = () => {
@@ -22,13 +22,13 @@ const Header = () => {
                 <div className="flex items-center space-x-2">
                     <SignedIn>
                         <Link href={"/dashboard"}>
-                            <Button>
+                            <Button variant="outline">
                                 <LayoutDashboard className="h-4 w-4"/>
                                 <span className="hidden md:block">Industry Insights</span>
                             
                             </Button>
                         </Link>
-                    </SignedIn>
+                    
 
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -40,25 +40,53 @@ const Header = () => {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
+                            <DropdownMenuItem>
+                                <Link href={'/resume'} className="flex items-center gap-2">
+                                <FileText className="h-4 w-4"/>
+                                <span>Build Resume</span>
+                                </Link>
+                            </DropdownMenuItem>      
                             
+                            <DropdownMenuItem> <Link href={'/ai-cover-letter'} className="flex items-center gap-2">
+                                <PenBox className="h-4 w-4"/>
+                                Cover Letter
+                                </Link>
+                                </DropdownMenuItem>
+                            <DropdownMenuItem> <Link href={'/interview'} className="flex items-center gap-2">
+                                <GraduationCap className="h-4 w-4"/>
+                                Interview Prep
+                                </Link>
+                                </DropdownMenuItem>
                             
-                            
-                            
-                            <DropdownMenuItem>Profile</DropdownMenuItem>
-                            <DropdownMenuItem>Billing</DropdownMenuItem>
-                            <DropdownMenuItem>Team</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
+                    </SignedIn>
+
+                    <SignedOut>
+                        <SignInButton>
+                            <Button variant="outline">
+                                Sign In
+                            </Button>
+                        </SignInButton>
+                        
+                    </SignedOut>
+                    <SignedIn>
+                         <UserButton
+                         appearance={{
+                            elements: {
+                                avatarBox: "w-10 h-10",
+                                userButtonPopoverCard: "shadow-xl",
+                                userPreviewMainIdentifier: "font-semibold",
+                            },
+                         }}
+                         afterSignOutUrl="/"
+                         
+                         />
+                    </SignedIn>
 
                 </div>
             </nav>
-           <SignedOut>
-              <SignInButton />
-              <SignUpButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+           
         </header>
     )
 }
